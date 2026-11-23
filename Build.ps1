@@ -24,7 +24,7 @@ foreach ($assembly in @('System.Drawing.dll', 'System.Windows.Forms.dll', 'Syste
 foreach ($assembly in @('WindowsBase.dll', 'PresentationCore.dll', 'PresentationFramework.dll', 'WindowsFormsIntegration.dll')) {
     $arguments += '/reference:' + (Join-Path $framework "WPF\$assembly")
 }
-$sources = @('Program.cs', 'LabwareExport.cs', 'Assimp.cs', 'Stl.cs', 'ModelViewer.cs', 'PreviewViewport.cs', 'StlMesh.cs')
+$sources = @('Program.cs', 'LabwareExport.cs', 'Assimp.cs', 'Stl.cs', 'ModelViewer.cs', 'PreviewViewport.cs', 'StlMesh.cs', 'DirectXModel.cs')
 foreach ($source in $sources) {
     $arguments += Join-Path $PSScriptRoot $source
 }
