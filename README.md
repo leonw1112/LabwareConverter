@@ -1,11 +1,12 @@
-# Hamilton Labware to STL
+# Hamilton Labware Converter
 
-A Windows desktop tool for exporting 3D models from a Hamilton VENUS labware library. It converts model geometry to binary STL and includes an optional viewer for inspecting the results.
+A Windows desktop tool for converting between STL meshes and Hamilton VENUS 3D models. It can create a new labware definition from a VENUS template and includes an optional STL viewer.
 
 ## Requirements
 
 - Windows with .NET Framework 4.5 or later.
-- For conversion, Hamilton VENUS with the 32-bit Assimp library at `%ProgramFiles(x86)%\Hamilton\Bin\assimp-vc143-mt.dll`. The STL viewer also runs independently of VENUS.
+- For Hamilton-to-STL exports, Hamilton VENUS with the 32-bit Assimp library at `%ProgramFiles(x86)%\Hamilton\Bin\assimp-vc143-mt.dll`. The STL viewer also runs independently of VENUS.
+- Creating a definition from a template uses the registered VENUS configuration component. Creating a standalone DirectX model from STL runs independently of VENUS.
 
 ## Build and run
 
@@ -28,6 +29,15 @@ The script uses the Windows .NET Framework compiler and creates `LabwareToSTL.ex
 | `STL/ExportReport.csv` | Per-file status, source model, output path, and dimensions for newly exported geometry |
 
 Labware definitions can be RCK, TML, CTR, or LID files. Supported model formats are DirectX X, Hamilton HXX, glTF, GLB, and 3DS. The exporter preserves source subfolders, uses Z as the vertical axis, and writes Hamilton model dimensions in millimetres. It applies definition offsets to labware exports. Missing 3D models and unresolved model references are listed in the report.
+
+## STL to Hamilton
+
+1. Click **STL to Hamilton** and choose a binary or ASCII STL.
+2. Set **STL units** to match the source model. The tool writes the DirectX model in millimetres and preserves the STL origin.
+3. To create a complete labware definition, select an existing `.rck`, `.tml`, `.ctr`, or `.lid` as a template. Choose a template with the well layout, site layout, and dimensions you need. Leave the template field blank to create a standalone `.x` model that you can attach in the VENUS Labware Editor.
+4. Click **Convert STL**. The default output is `HamiltonOutput\<name>` next to the executable. The generated model and copied definition sit together in that folder.
+
+The STL supplies the 3D surface. The template supplies the working dimensions, well geometry, carrier sites, and other labware settings. The copy uses the new output name and zero model offsets. Review the origin, dimensions, and functional settings in the VENUS Labware Editor before using the definition in a method. Keep the definition and `.x` file together. Template dependencies such as container definitions and site labware still refer to their existing files.
 
 ## STL viewer
 
@@ -62,3 +72,7 @@ Append `--overwrite` to the argument list to replace existing STL files. Exit co
 | `ModelViewer.cs` | File browser and viewer window |
 | `StlMesh.cs` | Binary and ASCII STL reading |
 | `PreviewViewport.cs` | 3D rendering and camera controls |
+| `DirectXModel.cs` | STL geometry conversion and DirectX writing |
+| `LabwareImport.cs` | Output package creation |
+| `VenusTemplate.cs` | VENUS template copying and model references |
+| `ImportWindow.cs` | STL-to-Hamilton window |

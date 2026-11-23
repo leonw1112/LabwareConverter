@@ -26,7 +26,7 @@ foreach ($assembly in @('WindowsBase.dll', 'PresentationCore.dll', 'Presentation
 }
 $sources = @(
     'Program.cs', 'LabwareExport.cs', 'Assimp.cs', 'Stl.cs', 'ModelViewer.cs', 'PreviewViewport.cs',
-    'StlMesh.cs', 'DirectXModel.cs', 'LabwareImport.cs', 'VenusTemplate.cs'
+    'StlMesh.cs', 'DirectXModel.cs', 'LabwareImport.cs', 'VenusTemplate.cs', 'ImportWindow.cs'
 )
 foreach ($source in $sources) {
     $arguments += Join-Path $PSScriptRoot $source

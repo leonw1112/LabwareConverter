@@ -48,6 +48,7 @@ internal sealed class ExportWindow : Form
     private readonly Button export = CreateButton("Export STLs");
     private readonly Button openOutput = CreateButton("Open output folder");
     private readonly Button openViewer = CreateButton("STL Viewer...");
+    private readonly Button openImport = CreateButton("STL to Hamilton...");
     private readonly CheckBox overwrite = new CheckBox
     {
         Text = "Overwrite existing STL files", AutoSize = true, Dock = DockStyle.Fill,
@@ -60,7 +61,7 @@ internal sealed class ExportWindow : Form
 
     internal ExportWindow()
     {
-        Text = "Hamilton Labware to STL";
+        Text = "Hamilton Labware Converter";
         Font = SystemFonts.MessageBoxFont;
         AutoScaleMode = AutoScaleMode.Dpi;
         ClientSize = new Size(660, 286);
@@ -102,6 +103,7 @@ internal sealed class ExportWindow : Form
         actions.Controls.Add(export);
         actions.Controls.Add(openOutput);
         actions.Controls.Add(openViewer);
+        actions.Controls.Add(openImport);
         AddWide(layout, actions, 7);
         Controls.Add(layout);
         AcceptButton = export;
@@ -114,6 +116,13 @@ internal sealed class ExportWindow : Form
         browseTarget.Click += delegate { ChooseFolder(target, "Choose the output folder for the STL files."); };
         openOutput.Click += delegate { OpenOutput(); };
         openViewer.Click += async delegate { await OpenViewer(); };
+        openImport.Click += delegate
+        {
+            using (var dialog = new ImportWindow())
+            {
+                dialog.ShowDialog(this);
+            }
+        };
         export.Click += async delegate { await Export(); };
         target.TextChanged += delegate { openOutput.Enabled = !busy && Directory.Exists(target.Text.Trim()); };
         openOutput.Enabled = Directory.Exists(target.Text);
