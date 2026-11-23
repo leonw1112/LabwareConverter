@@ -1,0 +1,9 @@
+/STL/
+/LabwareToSTL.exe
+*.[sS][tT][lL]
+ExportReport.csv
+*.pdb
+*.user
+/.vs/
+/bin/
+/obj/
