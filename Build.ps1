@@ -18,13 +18,16 @@ $output = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPat
 $executable = Join-Path $output 'LabwareToSTL.exe'
 
 $arguments = @('/nologo', '/utf8output', '/codepage:65001', '/optimize+', '/target:winexe', '/platform:x86', "/out:$executable")
-foreach ($assembly in @('System.Drawing.dll', 'System.Windows.Forms.dll', 'System.Xaml.dll')) {
+foreach ($assembly in @('System.Drawing.dll', 'System.Windows.Forms.dll', 'System.Xaml.dll', 'Microsoft.CSharp.dll')) {
     $arguments += "/reference:$assembly"
 }
 foreach ($assembly in @('WindowsBase.dll', 'PresentationCore.dll', 'PresentationFramework.dll', 'WindowsFormsIntegration.dll')) {
     $arguments += '/reference:' + (Join-Path $framework "WPF\$assembly")
 }
-$sources = @('Program.cs', 'LabwareExport.cs', 'Assimp.cs', 'Stl.cs', 'ModelViewer.cs', 'PreviewViewport.cs', 'StlMesh.cs', 'DirectXModel.cs')
+$sources = @(
+    'Program.cs', 'LabwareExport.cs', 'Assimp.cs', 'Stl.cs', 'ModelViewer.cs', 'PreviewViewport.cs',
+    'StlMesh.cs', 'DirectXModel.cs', 'LabwareImport.cs', 'VenusTemplate.cs'
+)
 foreach ($source in $sources) {
     $arguments += Join-Path $PSScriptRoot $source
 }
