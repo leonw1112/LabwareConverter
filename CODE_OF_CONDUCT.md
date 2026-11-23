@@ -59,8 +59,10 @@ representative at an online or offline event.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the community leaders responsible for enforcement at
-leonwieser.at.
+reported to the repository maintainer by opening a private GitHub issue or
+contacting the maintainer through GitHub. If you are not comfortable opening
+an issue, use the repository's private vulnerability reporting channel for a
+confidential report and clearly identify it as a code-of-conduct concern.
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the

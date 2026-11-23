@@ -1,6 +1,12 @@
 # Hamilton Labware Converter
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 A Windows desktop tool for converting between STL meshes and Hamilton VENUS 3D models. It can create a new labware definition from a VENUS template and includes an optional STL viewer.
+
+## Contributing
+
+Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for setup, build, and pull request guidance. Please follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Requirements
 
